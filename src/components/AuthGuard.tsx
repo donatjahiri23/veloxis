@@ -10,7 +10,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
-  const isPublicPage = pathname === "/login" || pathname === "/pricing";
+  const isPublicPage = pathname === "/login" || pathname === "/pricing" || pathname === "/landing";
 
   useEffect(() => {
     if (loading) return;
