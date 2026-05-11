@@ -89,10 +89,10 @@ export function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { theme, toggle } = useTheme();
-  const { user, signOut } = useAuth();
+  const { profile, signOut } = useAuth();
 
-  const displayName = user?.user_metadata?.full_name || user?.email?.split("@")[0] || "User";
-  const displayEmail = user?.email || "";
+  const displayName = profile?.full_name || profile?.email?.split("@")[0] || "User";
+  const displayEmail = profile?.email || "";
   const initials = displayName.slice(0, 2).toUpperCase();
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import { PLANS } from "@/lib/stripe";
 import { useRouter } from "next/navigation";
 
 export default function BillingPage() {
-  const { user } = useAuth();
+  const { user, profile } = useAuth();
   const { subscription, plan, isActive, isTrial, trialDaysLeft } = useSubscription();
   const [portalLoading, setPortalLoading] = useState(false);
   const router = useRouter();
@@ -170,16 +170,26 @@ export default function BillingPage() {
             <div>
               <p className="text-xs text-muted mb-1">Name</p>
               <p className="text-sm font-medium text-text-primary">
-                {user?.user_metadata?.full_name || "—"}
+                {profile?.full_name || "—"}
               </p>
             </div>
             <div>
               <p className="text-xs text-muted mb-1">Email</p>
-              <p className="text-sm font-medium text-text-primary">{user?.email}</p>
+              <p className="text-sm font-medium text-text-primary">{profile?.email || user?.email}</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted mb-1">Role</p>
+              <p className="text-sm font-medium text-text-primary capitalize">{profile?.role || "owner"}</p>
+            </div>
+            <div>
+              <p className="text-xs text-muted mb-1">Member Since</p>
+              <p className="text-sm font-medium text-text-primary">
+                {profile?.created_at ? new Date(profile.created_at).toLocaleDateString() : "—"}
+              </p>
             </div>
             <div>
               <p className="text-xs text-muted mb-1">User ID</p>
-              <p className="text-[10px] font-mono text-muted-light break-all">{user?.id}</p>
+              <p className="text-[10px] font-mono text-muted-light break-all">{profile?.id || user?.id}</p>
             </div>
             {subscription?.stripe_customer_id && (
               <div>
