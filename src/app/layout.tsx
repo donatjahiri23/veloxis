@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Sidebar } from "@/components/Sidebar";
-import { AiChat } from "@/components/AiChat";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AuthProvider } from "@/components/AuthProvider";
+import { AuthGuard } from "@/components/AuthGuard";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -40,11 +40,11 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen flex">
         <ThemeProvider>
-          <Sidebar />
-          <main className="flex-1 lg:ml-64 min-h-screen">
-            {children}
-          </main>
-          <AiChat />
+          <AuthProvider>
+            <AuthGuard>
+              {children}
+            </AuthGuard>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

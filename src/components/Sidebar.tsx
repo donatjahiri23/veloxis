@@ -5,6 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogoFull } from "./Logo";
 import { useTheme } from "./ThemeProvider";
+import { useAuth } from "./AuthProvider";
 
 const navItems = [
   { href: "/", label: "Dashboard", icon: "LayoutDashboard" },
@@ -82,6 +83,11 @@ export function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { theme, toggle } = useTheme();
+  const { user, signOut } = useAuth();
+
+  const displayName = user?.user_metadata?.full_name || user?.email?.split("@")[0] || "User";
+  const displayEmail = user?.email || "";
+  const initials = displayName.slice(0, 2).toUpperCase();
 
   useEffect(() => {
     setOpen(false);
@@ -167,20 +173,25 @@ export function Sidebar() {
             </div>
           </button>
 
+          {/* User profile */}
           <div className="bg-card-bg rounded-lg p-3 border border-card-border">
-            <div className="flex items-center gap-2 mb-2">
-              <div className="w-2 h-2 rounded-full bg-success" />
-              <span className="text-xs font-medium text-muted-light">System Status</span>
-            </div>
-            <div className="grid grid-cols-2 gap-2 text-xs">
-              <div>
-                <span className="text-muted">Events/s</span>
-                <p className="text-text-primary font-mono font-semibold">1,247</p>
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 rounded-lg bg-accent/15 border border-accent/20 flex items-center justify-center flex-shrink-0">
+                <span className="text-xs font-bold text-accent-light">{initials}</span>
               </div>
-              <div>
-                <span className="text-muted">Latency</span>
-                <p className="text-text-primary font-mono font-semibold">12ms</p>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-text-primary truncate">{displayName}</p>
+                <p className="text-[10px] text-muted truncate">{displayEmail}</p>
               </div>
+              <button
+                onClick={signOut}
+                title="Sign out"
+                className="p-1.5 rounded-lg text-muted hover:text-danger hover:bg-danger/10 transition-all flex-shrink-0"
+              >
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
