@@ -19,6 +19,7 @@ const navItems = [
   { href: "/reports", label: "Reports", icon: "FileText" },
   { href: "/events", label: "Live Events", icon: "Radio" },
   { href: "/assistant", label: "AI Assistant", icon: "Bot" },
+  { href: "/billing", label: "Billing", icon: "CreditCard" },
 ];
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -75,6 +76,11 @@ const iconMap: Record<string, React.ReactNode> = {
   Insights: (
     <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
       <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m10.58-10.875a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zM12 12.75a2.25 2.25 0 002.248-2.354M12 12.75a2.25 2.25 0 01-2.248-2.354M12 8.625c0-.621.336-1.162.837-1.453" />
+    </svg>
+  ),
+  CreditCard: (
+    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 002.25-2.25V6.75A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25v10.5A2.25 2.25 0 004.5 19.5z" />
     </svg>
   ),
 };

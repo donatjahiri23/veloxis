@@ -10,17 +10,17 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   const pathname = usePathname();
   const router = useRouter();
-  const isLoginPage = pathname === "/login";
+  const isPublicPage = pathname === "/login" || pathname === "/pricing";
 
   useEffect(() => {
     if (loading) return;
-    if (!user && !isLoginPage) {
+    if (!user && !isPublicPage) {
       router.replace("/login");
     }
-    if (user && isLoginPage) {
+    if (user && pathname === "/login") {
       router.replace("/");
     }
-  }, [user, loading, isLoginPage, router]);
+  }, [user, loading, isPublicPage, pathname, router]);
 
   // Loading state
   if (loading) {
@@ -34,8 +34,8 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // Login page — render without sidebar
-  if (isLoginPage) {
+  // Public pages — render without sidebar
+  if (isPublicPage && !user) {
     return <>{children}</>;
   }
 

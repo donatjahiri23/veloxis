@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/components/AuthProvider";
 import { AuthGuard } from "@/components/AuthGuard";
+import { SubscriptionProvider } from "@/components/SubscriptionProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -41,9 +42,11 @@ export default function RootLayout({
       <body className="min-h-screen flex">
         <ThemeProvider>
           <AuthProvider>
-            <AuthGuard>
-              {children}
-            </AuthGuard>
+            <SubscriptionProvider>
+              <AuthGuard>
+                {children}
+              </AuthGuard>
+            </SubscriptionProvider>
           </AuthProvider>
         </ThemeProvider>
       </body>
