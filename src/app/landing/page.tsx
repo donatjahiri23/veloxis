@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, FormEvent } from "react";
 import Link from "next/link";
 import { Logo } from "@/components/Logo";
 import { PLANS } from "@/lib/stripe";
@@ -97,6 +97,18 @@ const planOrder: PlanKey[] = ["starter", "growth", "enterprise"];
 
 export default function LandingPage() {
   const [billingCycle, setBillingCycle] = useState<"monthly" | "yearly">("monthly");
+  const [demoForm, setDemoForm] = useState({ name: "", email: "", company: "", teamSize: "" });
+  const [demoSubmitted, setDemoSubmitted] = useState(false);
+  const [demoLoading, setDemoLoading] = useState(false);
+
+  const handleDemoSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    setDemoLoading(true);
+    // Simulate submission (replace with real endpoint later)
+    await new Promise((r) => setTimeout(r, 1200));
+    setDemoSubmitted(true);
+    setDemoLoading(false);
+  };
 
   return (
     <div className="min-h-screen w-full bg-background text-foreground">
@@ -111,6 +123,7 @@ export default function LandingPage() {
             <a href="#features" className="text-sm text-muted-light hover:text-text-primary transition-colors">Features</a>
             <a href="#pricing" className="text-sm text-muted-light hover:text-text-primary transition-colors">Pricing</a>
             <a href="#testimonials" className="text-sm text-muted-light hover:text-text-primary transition-colors">Testimonials</a>
+            <a href="#book-demo" className="text-sm text-muted-light hover:text-text-primary transition-colors">Book a Demo</a>
           </div>
           <div className="flex items-center gap-3">
             <Link href="/login" className="text-sm font-medium text-muted-light hover:text-text-primary transition-colors px-3 py-2">
@@ -334,8 +347,142 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Book a Demo */}
+      <section id="book-demo" className="py-20 px-4 sm:px-6 lg:px-8 bg-card-bg/30">
+        <div className="max-w-5xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Left side — copy */}
+            <div>
+              <span className="text-xs font-semibold text-accent uppercase tracking-widest">Book a Demo</span>
+              <h2 className="text-3xl sm:text-4xl font-bold text-text-primary mt-3 mb-4">
+                See Veloxis in action
+              </h2>
+              <p className="text-muted-light mb-8 leading-relaxed">
+                Get a personalized walkthrough of the platform tailored to your business.
+                Our team will show you how Veloxis can unify your marketing data and uncover hidden growth opportunities.
+              </p>
+
+              <div className="space-y-5">
+                {[
+                  { icon: "M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z", text: "30-minute personalized walkthrough" },
+                  { icon: "M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z", text: "See attribution, events & AI insights live" },
+                  { icon: "M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0", text: "Talk to a product specialist — no sales pressure" },
+                  { icon: "M21 11.25v8.25a1.5 1.5 0 01-1.5 1.5H5.25a1.5 1.5 0 01-1.5-1.5v-8.25M12 4.875A2.625 2.625 0 109.375 7.5H12m0-2.625V7.5m0-2.625A2.625 2.625 0 1114.625 7.5H12m0 0V21m-8.625-9.75h18c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125h-18c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z", text: "Get a custom ROI projection for your spend" },
+                ].map((item) => (
+                  <div key={item.text} className="flex items-start gap-3">
+                    <div className="w-8 h-8 rounded-lg bg-accent/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                      <svg className="w-4 h-4 text-accent-light" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                        <path strokeLinecap="round" strokeLinejoin="round" d={item.icon} />
+                      </svg>
+                    </div>
+                    <span className="text-sm text-muted-light">{item.text}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Right side — form */}
+            <div className="bg-card-bg border border-card-border rounded-2xl p-6 lg:p-8">
+              {demoSubmitted ? (
+                <div className="text-center py-12">
+                  <div className="w-16 h-16 rounded-full bg-success/10 flex items-center justify-center mx-auto mb-5">
+                    <svg className="w-8 h-8 text-success" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <h3 className="text-xl font-bold text-text-primary mb-2">You&apos;re all set!</h3>
+                  <p className="text-muted-light text-sm">
+                    We&apos;ll reach out within 24 hours to schedule your personalized demo.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  <h3 className="text-lg font-bold text-text-primary mb-1">Request a Demo</h3>
+                  <p className="text-sm text-muted-light mb-6">Fill out the form and we&apos;ll be in touch shortly.</p>
+
+                  <form onSubmit={handleDemoSubmit} className="space-y-4">
+                    <div>
+                      <label className="block text-xs font-medium text-muted-light mb-1.5">Full Name *</label>
+                      <input
+                        type="text"
+                        required
+                        value={demoForm.name}
+                        onChange={(e) => setDemoForm({ ...demoForm, name: e.target.value })}
+                        placeholder="John Doe"
+                        className="w-full px-4 py-2.5 rounded-lg bg-background border border-card-border text-text-primary text-sm placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-muted-light mb-1.5">Work Email *</label>
+                      <input
+                        type="email"
+                        required
+                        value={demoForm.email}
+                        onChange={(e) => setDemoForm({ ...demoForm, email: e.target.value })}
+                        placeholder="john@company.com"
+                        className="w-full px-4 py-2.5 rounded-lg bg-background border border-card-border text-text-primary text-sm placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-muted-light mb-1.5">Company Name *</label>
+                      <input
+                        type="text"
+                        required
+                        value={demoForm.company}
+                        onChange={(e) => setDemoForm({ ...demoForm, company: e.target.value })}
+                        placeholder="Acme Inc."
+                        className="w-full px-4 py-2.5 rounded-lg bg-background border border-card-border text-text-primary text-sm placeholder:text-muted focus:outline-none focus:border-accent transition-colors"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-muted-light mb-1.5">Monthly Ad Spend</label>
+                      <select
+                        value={demoForm.teamSize}
+                        onChange={(e) => setDemoForm({ ...demoForm, teamSize: e.target.value })}
+                        className="w-full px-4 py-2.5 rounded-lg bg-background border border-card-border text-text-primary text-sm focus:outline-none focus:border-accent transition-colors"
+                      >
+                        <option value="">Select range</option>
+                        <option value="<10k">Under $10K</option>
+                        <option value="10k-50k">$10K – $50K</option>
+                        <option value="50k-200k">$50K – $200K</option>
+                        <option value="200k-1m">$200K – $1M</option>
+                        <option value="1m+">$1M+</option>
+                      </select>
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={demoLoading}
+                      className="w-full py-3 rounded-lg bg-accent hover:bg-accent/90 text-white font-semibold text-sm transition-all disabled:opacity-60 flex items-center justify-center gap-2 mt-2"
+                    >
+                      {demoLoading ? (
+                        <>
+                          <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
+                          Submitting...
+                        </>
+                      ) : (
+                        <>
+                          Book My Demo
+                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                            <path strokeLinecap="round" strokeLinejoin="round" d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3" />
+                          </svg>
+                        </>
+                      )}
+                    </button>
+
+                    <p className="text-[11px] text-muted text-center">
+                      By submitting, you agree to our privacy policy. No spam, ever.
+                    </p>
+                  </form>
+                </>
+              )}
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Pricing */}
-      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8 bg-card-bg/30">
+      <section id="pricing" className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-12">
             <span className="text-xs font-semibold text-accent uppercase tracking-widest">Pricing</span>
