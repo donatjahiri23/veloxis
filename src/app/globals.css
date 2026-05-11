@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+/* Dark mode (default) */
 :root {
   --background: #0a0b14;
   --foreground: #e2e8f0;
@@ -14,6 +15,33 @@
   --danger: #ef4444;
   --muted: #64748b;
   --muted-light: #94a3b8;
+  --tooltip-bg: #1a1b3a;
+  --hover-bg: rgba(255, 255, 255, 0.02);
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --input-bg: #0a0b14;
+}
+
+/* Light mode */
+[data-theme="light"] {
+  --background: #f5f7fa;
+  --foreground: #1e293b;
+  --sidebar-bg: #ffffff;
+  --card-bg: #ffffff;
+  --card-border: #e2e8f0;
+  --accent: #4f46e5;
+  --accent-light: #6366f1;
+  --accent-glow: rgba(79, 70, 229, 0.1);
+  --success: #059669;
+  --warning: #d97706;
+  --danger: #dc2626;
+  --muted: #94a3b8;
+  --muted-light: #64748b;
+  --tooltip-bg: #ffffff;
+  --hover-bg: rgba(0, 0, 0, 0.02);
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --input-bg: #f1f5f9;
 }
 
 @theme inline {
@@ -30,6 +58,11 @@
   --color-danger: var(--danger);
   --color-muted: var(--muted);
   --color-muted-light: var(--muted-light);
+  --color-tooltip-bg: var(--tooltip-bg);
+  --color-hover-bg: var(--hover-bg);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-input-bg: var(--input-bg);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -38,6 +71,7 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 * {

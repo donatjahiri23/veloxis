@@ -237,7 +237,7 @@ export default function RecommendationsPage() {
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <span className="text-sm text-muted">Active Recommendations</span>
-          <p className="text-2xl font-bold text-white mt-1">{totalImpact}</p>
+          <p className="text-2xl font-bold text-text-primary mt-1">{totalImpact}</p>
         </div>
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <span className="text-sm text-muted">Critical Actions</span>
@@ -263,7 +263,7 @@ export default function RecommendationsPage() {
               key={p}
               onClick={() => setFilterPriority(p)}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                filterPriority === p ? "bg-accent text-white" : "text-muted-light hover:text-white"
+                filterPriority === p ? "bg-accent text-white" : "text-muted-light hover:text-text-primary"
               }`}
             >
               {p === "all" ? "All Priorities" : p.charAt(0).toUpperCase() + p.slice(1)}
@@ -276,7 +276,7 @@ export default function RecommendationsPage() {
               key={c}
               onClick={() => setFilterCategory(c)}
               className={`px-3 py-1.5 rounded-md text-xs font-medium transition-all ${
-                filterCategory === c ? "bg-accent text-white" : "text-muted-light hover:text-white"
+                filterCategory === c ? "bg-accent text-white" : "text-muted-light hover:text-text-primary"
               }`}
             >
               {c === "all" ? "All" : categoryConfig[c as Category]?.label || c}
@@ -324,7 +324,7 @@ export default function RecommendationsPage() {
                       <span className="text-[10px] text-success bg-success/10 px-2 py-0.5 rounded-full font-medium">Applied</span>
                     )}
                   </div>
-                  <h3 className="text-sm font-semibold text-white mb-1">{rec.title}</h3>
+                  <h3 className="text-sm font-semibold text-text-primary mb-1">{rec.title}</h3>
                   <p className="text-xs text-success font-medium">{rec.impact}</p>
                 </div>
 
@@ -379,7 +379,7 @@ export default function RecommendationsPage() {
                       </button>
                       <button
                         onClick={(e) => { e.stopPropagation(); handleAction(rec.id, "dismissed"); }}
-                        className="px-4 py-2 text-muted-light text-xs border border-card-border rounded-lg hover:text-white hover:border-accent/30 transition-all"
+                        className="px-4 py-2 text-muted-light text-xs border border-card-border rounded-lg hover:text-text-primary hover:border-accent/30 transition-all"
                       >
                         Dismiss
                       </button>

@@ -21,7 +21,7 @@ export function MetricCard({ label, value, change, prefix = "", suffix = "", ico
         {icon && <div className="text-muted group-hover:text-accent-light transition-colors">{icon}</div>}
       </div>
       <div className="flex items-end gap-3">
-        <span className="text-2xl font-bold text-white font-mono tracking-tight">{formatted}</span>
+        <span className="text-2xl font-bold text-text-primary font-mono tracking-tight">{formatted}</span>
         {change !== undefined && (
           <span className={`text-sm font-medium flex items-center gap-0.5 mb-0.5 ${change >= 0 ? "text-success" : "text-danger"}`}>
             {change >= 0 ? (

@@ -15,7 +15,7 @@ import { fetchCostTrend, fetchCreatives, fetchAudienceSegments, fetchGeoPerforma
 function Tip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string; color: string }>; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[#1a1b3a] border border-card-border rounded-lg px-3 py-2 shadow-xl text-xs">
+    <div className="bg-tooltip-bg border border-card-border rounded-lg px-3 py-2 shadow-xl text-xs">
       <p className="text-muted mb-1">{label}</p>
       {payload.map((e, i) => (
         <p key={i} className="font-semibold" style={{ color: e.color }}>
@@ -36,7 +36,7 @@ function FunnelChart({ data }: { data: ReturnType<typeof generateFunnelData> }) 
         return (
           <div key={stage.stage} className="group">
             <div className="flex items-center justify-between mb-1">
-              <span className="text-xs font-medium text-white">{stage.stage}</span>
+              <span className="text-xs font-medium text-text-primary">{stage.stage}</span>
               <div className="flex items-center gap-3">
                 <span className="text-xs font-mono text-muted-light">{stage.value.toLocaleString()}</span>
                 {dropoff && (
@@ -52,7 +52,7 @@ function FunnelChart({ data }: { data: ReturnType<typeof generateFunnelData> }) 
                   background: `linear-gradient(90deg, ${i === data.length - 1 ? '#10b981' : '#6366f1'}, ${i === data.length - 1 ? '#34d399' : '#818cf8'})`,
                 }}
               >
-                <span className="text-[10px] font-bold text-white/90">{stage.rate}%</span>
+                <span className="text-[10px] font-bold text-text-primary/90">{stage.rate}%</span>
               </div>
             </div>
           </div>
@@ -140,13 +140,13 @@ export default function InsightsPage() {
       {/* Row 1: Funnel + Cost Trend */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-1">Conversion Funnel</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-1">Conversion Funnel</h3>
           <p className="text-xs text-muted mb-5">Full-funnel drop-off analysis from impression to conversion</p>
           <FunnelChart data={funnel} />
         </div>
 
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-1">Spend vs Revenue (30 days)</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-1">Spend vs Revenue (30 days)</h3>
           <p className="text-xs text-muted mb-4">Daily ad spend against revenue with ROAS trend line</p>
           <ResponsiveContainer width="100%" height={300}>
             <ComposedChart data={costTrend}>
@@ -177,7 +177,7 @@ export default function InsightsPage() {
       {/* Row 2: CPA/CPL Trend + Budget Pacing */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-1">CPA & Cost per Lead Trend</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-1">CPA & Cost per Lead Trend</h3>
           <p className="text-xs text-muted mb-4">Are acquisition costs going up or down?</p>
           <ResponsiveContainer width="100%" height={260}>
             <LineChart data={costTrend}>
@@ -193,7 +193,7 @@ export default function InsightsPage() {
         </div>
 
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-1">Budget Pacing</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-1">Budget Pacing</h3>
           <p className="text-xs text-muted mb-4">Are you on track to hit monthly budget targets?</p>
           <div className="space-y-4">
             {budget.map((b) => {
@@ -202,7 +202,7 @@ export default function InsightsPage() {
               return (
                 <div key={b.channel}>
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-xs font-medium text-white">{b.channel}</span>
+                    <span className="text-xs font-medium text-text-primary">{b.channel}</span>
                     <div className="flex items-center gap-3 text-[10px] font-mono">
                       <span className="text-muted-light">${b.spent.toLocaleString()} / ${b.budget.toLocaleString()}</span>
                       <span className={b.on_track ? "text-success" : b.over_budget ? "text-danger" : "text-warning"}>
@@ -236,7 +236,7 @@ export default function InsightsPage() {
 
       {/* Row 3: Daypart Heatmap */}
       <div className="bg-card-bg border border-card-border rounded-xl p-4 lg:p-5 mb-6 lg:mb-8">
-        <h3 className="text-sm font-semibold text-white mb-1">Daypart Performance Heatmap</h3>
+        <h3 className="text-sm font-semibold text-text-primary mb-1">Daypart Performance Heatmap</h3>
         <p className="text-xs text-muted mb-4">Conversions by day of week and hour — find your best windows</p>
         <div className="overflow-x-auto">
           <div className="min-w-[700px]">
@@ -266,14 +266,14 @@ export default function InsightsPage() {
       {/* Row 4: Creative Performance + Audience Segments */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-1">Creative Performance</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-1">Creative Performance</h3>
           <p className="text-xs text-muted mb-4">Which ads are driving results? Watch for fatigue.</p>
           <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
             {creatives.map((c, i) => (
               <div key={i} className="border border-card-border rounded-lg p-3 hover:border-accent/20 transition-all">
                 <div className="flex items-start justify-between mb-2">
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs font-medium text-white truncate">{c.name}</p>
+                    <p className="text-xs font-medium text-text-primary truncate">{c.name}</p>
                     <div className="flex items-center gap-2 mt-0.5">
                       <span className="text-[10px] text-muted bg-white/5 px-1.5 py-0.5 rounded">{c.format}</span>
                       {c.duration !== "-" && <span className="text-[10px] text-muted">{c.duration}</span>}
@@ -286,15 +286,15 @@ export default function InsightsPage() {
                 <div className="grid grid-cols-4 gap-2 text-[10px]">
                   <div>
                     <span className="text-muted">Clicks</span>
-                    <p className="text-white font-mono">{c.clicks.toLocaleString()}</p>
+                    <p className="text-text-primary font-mono">{c.clicks.toLocaleString()}</p>
                   </div>
                   <div>
                     <span className="text-muted">Conv.</span>
-                    <p className="text-white font-mono">{c.conversions}</p>
+                    <p className="text-text-primary font-mono">{c.conversions}</p>
                   </div>
                   <div>
                     <span className="text-muted">CTR</span>
-                    <p className="text-white font-mono">{c.ctr}%</p>
+                    <p className="text-text-primary font-mono">{c.ctr}%</p>
                   </div>
                   <div>
                     <span className="text-muted">Fatigue</span>
@@ -314,7 +314,7 @@ export default function InsightsPage() {
         </div>
 
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-1">Audience Segments</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-1">Audience Segments</h3>
           <p className="text-xs text-muted mb-4">Which audiences convert best? Where to scale spend.</p>
           <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
             <table className="w-full text-[11px]">
@@ -331,12 +331,12 @@ export default function InsightsPage() {
               </thead>
               <tbody>
                 {audiences.map((a, i) => (
-                  <tr key={i} className="border-b border-card-border/50 hover:bg-white/[0.02]">
-                    <td className="py-2 px-2 font-medium text-white max-w-[160px] truncate">{a.name}</td>
+                  <tr key={i} className="border-b border-card-border/50 hover:bg-hover-bg">
+                    <td className="py-2 px-2 font-medium text-text-primary max-w-[160px] truncate">{a.name}</td>
                     <td className="py-2 px-2 text-right font-mono text-muted-light">
                       {a.size > 1000000 ? `${(a.size / 1000000).toFixed(1)}M` : `${(a.size / 1000).toFixed(0)}K`}
                     </td>
-                    <td className="py-2 px-2 text-right font-mono text-white">{a.conversions}</td>
+                    <td className="py-2 px-2 text-right font-mono text-text-primary">{a.conversions}</td>
                     <td className="py-2 px-2 text-right font-mono text-muted-light">{a.conversion_rate}%</td>
                     <td className="py-2 px-2 text-right font-mono text-muted-light">${a.cpa}</td>
                     <td className={`py-2 px-2 text-right font-mono font-semibold ${a.roas >= 3 ? "text-success" : a.roas >= 1.5 ? "text-warning" : "text-danger"}`}>
@@ -355,7 +355,7 @@ export default function InsightsPage() {
 
       {/* Row 5: Geo Performance */}
       <div className="bg-card-bg border border-card-border rounded-xl p-4 lg:p-5 mb-6 lg:mb-8">
-        <h3 className="text-sm font-semibold text-white mb-1">Geographic Performance</h3>
+        <h3 className="text-sm font-semibold text-text-primary mb-1">Geographic Performance</h3>
         <p className="text-xs text-muted mb-4">Revenue and efficiency by region — identify expansion opportunities</p>
         <div className="grid grid-cols-2 gap-6">
           <ResponsiveContainer width="100%" height={350}>
@@ -383,12 +383,12 @@ export default function InsightsPage() {
               </thead>
               <tbody>
                 {geo.map((g, i) => (
-                  <tr key={i} className="border-b border-card-border/50 hover:bg-white/[0.02]">
+                  <tr key={i} className="border-b border-card-border/50 hover:bg-hover-bg">
                     <td className="py-2 px-2">
-                      <span className="text-white font-medium">{g.region}</span>
+                      <span className="text-text-primary font-medium">{g.region}</span>
                       <span className="text-muted ml-1 text-[9px]">{g.country}</span>
                     </td>
-                    <td className="py-2 px-2 text-right font-mono text-white">{g.conversions}</td>
+                    <td className="py-2 px-2 text-right font-mono text-text-primary">{g.conversions}</td>
                     <td className="py-2 px-2 text-right font-mono text-success">${g.revenue.toLocaleString()}</td>
                     <td className="py-2 px-2 text-right font-mono text-muted-light">${g.cpa}</td>
                     <td className={`py-2 px-2 text-right font-mono font-semibold ${g.roas >= 3 ? "text-success" : g.roas >= 1.5 ? "text-warning" : "text-danger"}`}>
@@ -405,7 +405,7 @@ export default function InsightsPage() {
 
       {/* Row 6: Cumulative ROAS curve */}
       <div className="bg-card-bg border border-card-border rounded-xl p-5">
-        <h3 className="text-sm font-semibold text-white mb-1">Cumulative ROAS Curve</h3>
+        <h3 className="text-sm font-semibold text-text-primary mb-1">Cumulative ROAS Curve</h3>
         <p className="text-xs text-muted mb-4">How your total return on ad spend builds over time</p>
         <ResponsiveContainer width="100%" height={280}>
           <AreaChart data={costTrend}>

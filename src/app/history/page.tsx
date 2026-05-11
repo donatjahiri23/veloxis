@@ -65,7 +65,7 @@ function FilterDropdown({ label, options, value, onChange }: {
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="bg-card-bg border border-card-border rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-accent/50 appearance-none cursor-pointer min-w-[140px]"
+        className="bg-card-bg border border-card-border rounded-lg px-3 py-2 text-sm text-text-primary focus:outline-none focus:border-accent/50 appearance-none cursor-pointer min-w-[140px]"
       >
         <option value="all">All {label}</option>
         {options.map(o => (
@@ -297,7 +297,7 @@ export default function HistoryPage() {
               a.click();
               URL.revokeObjectURL(url);
             }}
-            className="flex items-center gap-2 bg-card-bg border border-card-border rounded-lg px-4 py-2 text-sm text-muted-light hover:text-white hover:border-accent/30 transition-all"
+            className="flex items-center gap-2 bg-card-bg border border-card-border rounded-lg px-4 py-2 text-sm text-muted-light hover:text-text-primary hover:border-accent/30 transition-all"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
@@ -316,7 +316,7 @@ export default function HistoryPage() {
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
               viewLevel === tab.key
                 ? "bg-accent text-white shadow-md shadow-accent/20"
-                : "text-muted-light hover:text-white hover:bg-white/5"
+                : "text-muted-light hover:text-text-primary hover:bg-white/5"
             }`}
           >
             {tab.icon}
@@ -355,14 +355,14 @@ export default function HistoryPage() {
                 placeholder="Search..."
                 value={search}
                 onChange={(e) => { setSearch(e.target.value); setPage(0); }}
-                className="bg-background border border-card-border rounded-lg pl-9 pr-3 py-2 text-sm text-white placeholder-muted focus:outline-none focus:border-accent/50 w-[160px]"
+                className="bg-background border border-card-border rounded-lg pl-9 pr-3 py-2 text-sm text-text-primary placeholder-muted focus:outline-none focus:border-accent/50 w-[160px]"
               />
             </div>
           </div>
 
           <button
             onClick={resetFilters}
-            className="px-3 py-2 text-xs text-muted-light hover:text-white border border-card-border rounded-lg hover:border-accent/30 transition-all"
+            className="px-3 py-2 text-xs text-muted-light hover:text-text-primary border border-card-border rounded-lg hover:border-accent/30 transition-all"
           >
             Reset
           </button>
@@ -388,7 +388,7 @@ export default function HistoryPage() {
                   <th
                     key={col.key}
                     onClick={() => handleSort(col.key)}
-                    className={`py-3 px-3 text-${col.align} text-muted font-medium cursor-pointer hover:text-white transition-colors whitespace-nowrap ${
+                    className={`py-3 px-3 text-${col.align} text-muted font-medium cursor-pointer hover:text-text-primary transition-colors whitespace-nowrap ${
                       sortBy === col.key ? "text-accent-light" : ""
                     }`}
                   >
@@ -402,10 +402,10 @@ export default function HistoryPage() {
             </thead>
             <tbody>
               {paged.map((row) => (
-                <tr key={row.id} className="border-b border-card-border/50 hover:bg-white/[0.02] transition-colors">
+                <tr key={row.id} className="border-b border-card-border/50 hover:bg-hover-bg transition-colors">
                   {columns.map((col) => (
                     <td key={col.key} className={`py-2.5 px-3 text-${col.align} font-mono text-muted-light whitespace-nowrap ${
-                      col.key === "campaign" || col.key === "date" ? "text-white font-sans font-medium" :
+                      col.key === "campaign" || col.key === "date" ? "text-text-primary font-sans font-medium" :
                       col.key === "ad_group" ? "text-accent-light font-sans font-medium" :
                       col.key === "ad" ? "font-sans text-xs max-w-[250px] truncate" :
                       col.key === "channel" || col.key === "account" || col.key === "device" ? "font-sans" : ""
@@ -438,14 +438,14 @@ export default function HistoryPage() {
               <button
                 onClick={() => setPage(0)}
                 disabled={page === 0}
-                className="px-2 py-1 text-xs text-muted-light hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="px-2 py-1 text-xs text-muted-light hover:text-text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 First
               </button>
               <button
                 onClick={() => setPage(p => p - 1)}
                 disabled={page === 0}
-                className="px-2 py-1 text-xs text-muted-light hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="px-2 py-1 text-xs text-muted-light hover:text-text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 Prev
               </button>
@@ -467,7 +467,7 @@ export default function HistoryPage() {
                     className={`w-7 h-7 rounded text-xs font-medium transition-all ${
                       page === pageNum
                         ? "bg-accent text-white"
-                        : "text-muted-light hover:text-white hover:bg-white/5"
+                        : "text-muted-light hover:text-text-primary hover:bg-white/5"
                     }`}
                   >
                     {pageNum + 1}
@@ -477,14 +477,14 @@ export default function HistoryPage() {
               <button
                 onClick={() => setPage(p => p + 1)}
                 disabled={page >= totalPages - 1}
-                className="px-2 py-1 text-xs text-muted-light hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="px-2 py-1 text-xs text-muted-light hover:text-text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 Next
               </button>
               <button
                 onClick={() => setPage(totalPages - 1)}
                 disabled={page >= totalPages - 1}
-                className="px-2 py-1 text-xs text-muted-light hover:text-white disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                className="px-2 py-1 text-xs text-muted-light hover:text-text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
               >
                 Last
               </button>

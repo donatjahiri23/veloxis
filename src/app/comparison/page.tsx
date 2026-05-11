@@ -116,7 +116,7 @@ function ComparisonRow({ label, currentVal, previousVal, format = "number", inve
   label: string; currentVal: number; previousVal: number; format?: string; inverse?: boolean;
 }) {
   return (
-    <div className="flex items-center justify-between py-3 border-b border-card-border/50 hover:bg-white/[0.01] px-4">
+    <div className="flex items-center justify-between py-3 border-b border-card-border/50 hover:bg-hover-bg px-4">
       <span className="text-sm text-muted-light">{label}</span>
       <div className="flex items-center gap-8">
         <span className="text-sm font-mono text-accent-light w-28 text-right">{formatValue(currentVal, format)}</span>
@@ -132,7 +132,7 @@ function ComparisonRow({ label, currentVal, previousVal, format = "number", inve
 function Tip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string; color: string }>; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[#1a1b3a] border border-card-border rounded-lg px-3 py-2 shadow-xl text-xs">
+    <div className="bg-tooltip-bg border border-card-border rounded-lg px-3 py-2 shadow-xl text-xs">
       <p className="text-muted mb-1">{label}</p>
       {payload.map((e, i) => (
         <p key={i} className="font-semibold" style={{ color: e.color }}>
@@ -192,7 +192,7 @@ export default function ComparisonPage() {
             className={`px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
               selectedPreset === i
                 ? "bg-accent text-white shadow-md shadow-accent/20"
-                : "bg-card-bg text-muted-light border border-card-border hover:border-accent/20 hover:text-white"
+                : "bg-card-bg text-muted-light border border-card-border hover:border-accent/20 hover:text-text-primary"
             }`}
           >
             {p.label}
@@ -214,7 +214,7 @@ export default function ComparisonPage() {
             <div key={m.label} className="bg-card-bg border border-card-border rounded-xl p-5">
               <span className="text-sm text-muted">{m.label}</span>
               <div className="flex items-end gap-3 mt-2">
-                <span className="text-2xl font-bold text-white font-mono">{formatValue(m.curr, m.format)}</span>
+                <span className="text-2xl font-bold text-text-primary font-mono">{formatValue(m.curr, m.format)}</span>
                 <span className={`text-sm font-medium mb-0.5 ${isPositive ? "text-success" : "text-danger"}`}>
                   {change > 0 ? "↑" : "↓"} {Math.abs(change).toFixed(1)}%
                 </span>
@@ -228,7 +228,7 @@ export default function ComparisonPage() {
       {/* Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Revenue by Channel</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-4">Revenue by Channel</h3>
           <ResponsiveContainer width="100%" height={320}>
             <BarChart data={channelComparison} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#1e2044" />
@@ -243,7 +243,7 @@ export default function ComparisonPage() {
         </div>
 
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Conversions by Channel</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-4">Conversions by Channel</h3>
           <ResponsiveContainer width="100%" height={320}>
             <BarChart data={channelComparison} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#1e2044" />
@@ -261,7 +261,7 @@ export default function ComparisonPage() {
       {/* Detailed comparison table */}
       <div className="bg-card-bg border border-card-border rounded-xl overflow-hidden">
         <div className="flex items-center justify-between px-4 py-3 border-b border-card-border">
-          <h3 className="text-sm font-semibold text-white">Detailed Metrics Comparison</h3>
+          <h3 className="text-sm font-semibold text-text-primary">Detailed Metrics Comparison</h3>
           <div className="flex items-center gap-8">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 rounded-sm bg-accent" />
@@ -291,14 +291,14 @@ export default function ComparisonPage() {
         <ComparisonRow label="CPL" currentVal={currentPeriod.cpl} previousVal={previousPeriod.cpl} format="currency" inverse />
 
         {/* Channel breakdown */}
-        <div className="px-4 py-3 border-t border-card-border bg-white/[0.01]">
+        <div className="px-4 py-3 border-t border-card-border bg-hover-bg">
           <h4 className="text-xs font-semibold text-muted uppercase tracking-wider mb-1">By Channel</h4>
         </div>
         {currentPeriod.channels.map((c, i) => {
           const prev = previousPeriod.channels[i];
           return (
-            <div key={c.name} className="px-4 py-2 border-b border-card-border/30 hover:bg-white/[0.01]">
-              <p className="text-xs font-medium text-white mb-2 ml-2">{c.name}</p>
+            <div key={c.name} className="px-4 py-2 border-b border-card-border/30 hover:bg-hover-bg">
+              <p className="text-xs font-medium text-text-primary mb-2 ml-2">{c.name}</p>
               <div className="grid grid-cols-4 gap-4 ml-4">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-muted">Spend</span>
@@ -317,7 +317,7 @@ export default function ComparisonPage() {
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] text-muted">Conv.</span>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-mono text-white">{c.conversions}</span>
+                    <span className="text-[10px] font-mono text-text-primary">{c.conversions}</span>
                     <ChangeIndicator current={c.conversions} previous={prev?.conversions || 0} />
                   </div>
                 </div>

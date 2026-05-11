@@ -137,7 +137,7 @@ function CalendarMonth({
   return (
     <div className="w-[280px]">
       <div className="text-center mb-4">
-        <span className="text-base font-semibold text-white">{MONTH_NAMES[month]}</span>
+        <span className="text-base font-semibold text-text-primary">{MONTH_NAMES[month]}</span>
         <span className="text-base text-muted ml-2">{year}</span>
       </div>
       <div className="grid grid-cols-7 gap-0.5">
@@ -164,10 +164,10 @@ function CalendarMonth({
                   start || end
                     ? "bg-accent text-white font-semibold"
                     : inRange
-                    ? "text-white hover:bg-accent/30"
+                    ? "text-text-primary hover:bg-accent/30"
                     : isToday
                     ? "text-accent-light font-semibold ring-1 ring-accent/40 hover:bg-accent/20"
-                    : "text-muted-light hover:bg-white/10 hover:text-white"
+                    : "text-muted-light hover:bg-white/10 hover:text-text-primary"
                 }`}
               >
                 {day}
@@ -266,7 +266,7 @@ export function DateRangePicker({ from, to, onChange }: DateRangePickerProps) {
         <label className="text-[10px] text-muted uppercase tracking-wider font-medium">Date Range</label>
         <button
           onClick={() => { setOpen(!open); setTempFrom(from); setTempTo(to); }}
-          className="flex items-center gap-2 bg-card-bg border border-card-border rounded-lg px-3 py-2 text-sm text-white hover:border-accent/30 transition-all min-w-[200px]"
+          className="flex items-center gap-2 bg-card-bg border border-card-border rounded-lg px-3 py-2 text-sm text-text-primary hover:border-accent/30 transition-all min-w-[200px]"
         >
           <svg className="w-4 h-4 text-muted flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5" />
@@ -291,7 +291,7 @@ export function DateRangePicker({ from, to, onChange }: DateRangePickerProps) {
                   className={`w-full text-left px-3 py-2 rounded-md text-sm transition-all ${
                     activePreset === preset.label
                       ? "bg-accent/15 text-accent-light font-medium border-l-2 border-accent"
-                      : "text-muted-light hover:text-white hover:bg-white/5"
+                      : "text-muted-light hover:text-text-primary hover:bg-white/5"
                   }`}
                 >
                   {preset.label}
@@ -303,13 +303,13 @@ export function DateRangePicker({ from, to, onChange }: DateRangePickerProps) {
           {/* Calendar */}
           <div className="p-6">
             <div className="flex items-center justify-between mb-5 px-2">
-              <button onClick={goLeft} className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-light hover:text-white hover:bg-white/10 transition-all">
+              <button onClick={goLeft} className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-light hover:text-text-primary hover:bg-white/10 transition-all">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
                 </svg>
               </button>
               <div className="flex-1" />
-              <button onClick={goRight} className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-light hover:text-white hover:bg-white/10 transition-all">
+              <button onClick={goRight} className="w-8 h-8 rounded-lg flex items-center justify-center text-muted-light hover:text-text-primary hover:bg-white/10 transition-all">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                 </svg>
@@ -343,7 +343,7 @@ export function DateRangePicker({ from, to, onChange }: DateRangePickerProps) {
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleCancel}
-                  className="px-5 py-2 text-sm text-muted-light border border-card-border rounded-lg hover:text-white hover:border-accent/30 transition-all"
+                  className="px-5 py-2 text-sm text-muted-light border border-card-border rounded-lg hover:text-text-primary hover:border-accent/30 transition-all"
                 >
                   Cancel
                 </button>

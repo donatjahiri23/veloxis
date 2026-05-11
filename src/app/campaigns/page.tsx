@@ -15,7 +15,7 @@ const statusColors: Record<string, { bg: string; text: string; dot: string }> = 
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string; color: string }>; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[#1a1b3a] border border-card-border rounded-lg px-3 py-2 shadow-xl">
+    <div className="bg-tooltip-bg border border-card-border rounded-lg px-3 py-2 shadow-xl">
       <p className="text-xs text-muted mb-1">{label}</p>
       {payload.map((entry, i) => (
         <p key={i} className="text-sm font-semibold" style={{ color: entry.color }}>
@@ -98,7 +98,7 @@ export default function CampaignsPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">ROAS by Campaign</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-4">ROAS by Campaign</h3>
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={roasData.slice(0, 10)} layout="vertical">
               <CartesianGrid strokeDasharray="3 3" stroke="#1e2044" />
@@ -111,7 +111,7 @@ export default function CampaignsPage() {
         </div>
 
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Spend vs Revenue (bubble = conversions)</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-4">Spend vs Revenue (bubble = conversions)</h3>
           <ResponsiveContainer width="100%" height={300}>
             <ScatterChart>
               <CartesianGrid strokeDasharray="3 3" stroke="#1e2044" />
@@ -122,8 +122,8 @@ export default function CampaignsPage() {
                 if (!payload?.length) return null;
                 const d = payload[0].payload;
                 return (
-                  <div className="bg-[#1a1b3a] border border-card-border rounded-lg px-3 py-2 shadow-xl">
-                    <p className="text-xs text-white font-semibold mb-1">{d.name}</p>
+                  <div className="bg-tooltip-bg border border-card-border rounded-lg px-3 py-2 shadow-xl">
+                    <p className="text-xs text-text-primary font-semibold mb-1">{d.name}</p>
                     <p className="text-xs text-muted">Spend: ${d.x.toLocaleString()}</p>
                     <p className="text-xs text-success">Revenue: ${d.y.toLocaleString()}</p>
                     <p className="text-xs text-accent-light">Conversions: {d.z}</p>
@@ -138,14 +138,14 @@ export default function CampaignsPage() {
 
       <div className="bg-card-bg border border-card-border rounded-xl p-5">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="text-sm font-semibold text-white">All Campaigns</h3>
+          <h3 className="text-sm font-semibold text-text-primary">All Campaigns</h3>
           <div className="flex items-center bg-background border border-card-border rounded-lg overflow-hidden">
             {["all", "active", "paused", "completed"].map((s) => (
               <button
                 key={s}
                 onClick={() => setStatusFilter(s)}
                 className={`px-3 py-1.5 text-xs font-medium transition-colors ${
-                  statusFilter === s ? "bg-accent text-white" : "text-muted-light hover:text-white"
+                  statusFilter === s ? "bg-accent text-white" : "text-muted-light hover:text-text-primary"
                 }`}
               >
                 {s.charAt(0).toUpperCase() + s.slice(1)}
@@ -172,7 +172,7 @@ export default function CampaignsPage() {
                   <th
                     key={col.key}
                     onClick={() => handleSort(col.key as keyof CampaignRow)}
-                    className={`py-3 px-3 text-${col.align} text-muted font-medium cursor-pointer hover:text-white transition-colors ${
+                    className={`py-3 px-3 text-${col.align} text-muted font-medium cursor-pointer hover:text-text-primary transition-colors ${
                       sortBy === col.key ? "text-accent-light" : ""
                     }`}
                   >
@@ -188,8 +188,8 @@ export default function CampaignsPage() {
               {filtered.map((c) => {
                 const sc = statusColors[c.status] || statusColors.active;
                 return (
-                  <tr key={c.id} className="border-b border-card-border/50 hover:bg-white/[0.02] transition-colors">
-                    <td className="py-3 px-3 font-medium text-white">{c.name}</td>
+                  <tr key={c.id} className="border-b border-card-border/50 hover:bg-hover-bg transition-colors">
+                    <td className="py-3 px-3 font-medium text-text-primary">{c.name}</td>
                     <td className="py-3 px-3 text-muted-light">{c.channel}</td>
                     <td className="py-3 px-3">
                       <span className={`inline-flex items-center gap-1.5 text-[10px] px-2 py-0.5 rounded-full font-medium ${sc.bg} ${sc.text}`}>
@@ -201,7 +201,7 @@ export default function CampaignsPage() {
                     <td className="py-3 px-3 text-right font-mono text-muted-light">{c.impressions.toLocaleString()}</td>
                     <td className="py-3 px-3 text-right font-mono text-muted-light">{c.clicks.toLocaleString()}</td>
                     <td className="py-3 px-3 text-right font-mono text-muted-light">{c.ctr}%</td>
-                    <td className="py-3 px-3 text-right font-mono text-white font-semibold">{c.conversions}</td>
+                    <td className="py-3 px-3 text-right font-mono text-text-primary font-semibold">{c.conversions}</td>
                     <td className="py-3 px-3 text-right font-mono text-success">${c.revenue.toLocaleString()}</td>
                     <td className={`py-3 px-3 text-right font-mono font-semibold ${c.roas >= 3 ? "text-success" : c.roas >= 1 ? "text-warning" : "text-danger"}`}>
                       {c.roas}x

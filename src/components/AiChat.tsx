@@ -118,7 +118,7 @@ function formatMarkdown(text: string): string {
     .replace(/>/g, "&gt;");
 
   html = html
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-text-primary">$1</strong>')
     .replace(/\n\n/g, '</p><p class="mt-2">')
     .replace(/\n- /g, '</p><p class="mt-1 pl-3">• ')
     .replace(/\n(\d+)\. /g, '</p><p class="mt-1 pl-3">$1. ')
@@ -212,7 +212,7 @@ export function AiChat() {
             <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         ) : (
-          <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+          <svg className="w-6 h-6 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
             <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09zM18.259 8.715L18 9.75l-.259-1.035a3.375 3.375 0 00-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 002.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 002.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 00-2.455 2.456z" />
           </svg>
         )}
@@ -220,16 +220,16 @@ export function AiChat() {
 
       {/* Chat panel */}
       {isOpen && (
-        <div className="fixed bottom-0 right-0 sm:bottom-20 sm:right-4 lg:bottom-24 lg:right-6 z-[100] w-full h-full sm:w-[380px] sm:h-[520px] lg:w-[420px] lg:h-[560px] bg-[#0d0e1a] border border-card-border sm:rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden">
+        <div className="fixed bottom-0 right-0 sm:bottom-20 sm:right-4 lg:bottom-24 lg:right-6 z-[100] w-full h-full sm:w-[380px] sm:h-[520px] lg:w-[420px] lg:h-[560px] bg-sidebar-bg border border-card-border sm:rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden">
           {/* Header */}
           <div className="px-4 py-3 border-b border-card-border flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-              <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+              <svg className="w-4 h-4 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
               </svg>
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-sm font-semibold text-white">Veloxis AI</h3>
+              <h3 className="text-sm font-semibold text-text-primary">Veloxis AI</h3>
               <p className="text-[10px] text-muted truncate">
                 Viewing: {pageInfo.context} · Powered by Claude
               </p>
@@ -239,7 +239,7 @@ export function AiChat() {
                 setMessages([]);
                 setError(null);
               }}
-              className="text-xs text-muted hover:text-white transition-colors px-2 py-1"
+              className="text-xs text-muted hover:text-text-primary transition-colors px-2 py-1"
               title="Clear chat"
             >
               Clear
@@ -265,7 +265,7 @@ export function AiChat() {
                     <button
                       key={q}
                       onClick={() => handleSend(q)}
-                      className="w-full text-left text-xs text-muted-light bg-white/[0.03] border border-card-border rounded-lg px-3 py-2 hover:border-accent/30 hover:text-white transition-all"
+                      className="w-full text-left text-xs text-muted-light bg-white/[0.03] border border-card-border rounded-lg px-3 py-2 hover:border-accent/30 hover:text-text-primary transition-all"
                     >
                       {q}
                     </button>
@@ -280,7 +280,7 @@ export function AiChat() {
                   {msg.role === "assistant" && (
                     <div className="flex items-center gap-1.5 mb-1">
                       <div className="w-5 h-5 rounded-md bg-accent flex items-center justify-center">
-                        <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                        <svg className="w-3 h-3 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                           <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
                         </svg>
                       </div>
@@ -309,7 +309,7 @@ export function AiChat() {
                 <div>
                   <div className="flex items-center gap-1.5 mb-1">
                     <div className="w-5 h-5 rounded-md bg-accent flex items-center justify-center">
-                      <svg className="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <svg className="w-3 h-3 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
                       </svg>
                     </div>
@@ -345,13 +345,13 @@ export function AiChat() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleSend()}
                 placeholder="Ask about your marketing data..."
-                className="flex-1 bg-white/[0.03] border border-card-border rounded-lg px-3 py-2 text-xs text-white placeholder-muted focus:outline-none focus:border-accent/50"
+                className="flex-1 bg-white/[0.03] border border-card-border rounded-lg px-3 py-2 text-xs text-text-primary placeholder-muted focus:outline-none focus:border-accent/50"
                 disabled={isLoading}
               />
               <button
                 onClick={() => handleSend()}
                 disabled={!input.trim() || isLoading}
-                className="bg-accent hover:bg-accent/80 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-lg p-2 transition-all"
+                className="bg-accent hover:bg-accent/80 disabled:opacity-40 disabled:cursor-not-allowed text-text-primary rounded-lg p-2 transition-all"
               >
                 <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />

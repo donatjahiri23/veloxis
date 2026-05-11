@@ -316,7 +316,7 @@ export default function ReportsPage() {
             className={`pb-3 px-1 text-sm font-medium border-b-2 transition-colors ${
               activeTab === tab
                 ? "border-accent text-accent-light"
-                : "border-transparent text-muted hover:text-white"
+                : "border-transparent text-muted hover:text-text-primary"
             }`}
           >
             {tab === "scheduled" ? "Scheduled Reports" : "Report History"}
@@ -334,7 +334,7 @@ export default function ReportsPage() {
       {/* Create Report Modal */}
       {showCreateModal && (
         <div className="bg-card-bg border border-accent/30 rounded-xl p-6 mb-6">
-          <h3 className="text-lg font-semibold text-white mb-4">Create New Report</h3>
+          <h3 className="text-lg font-semibold text-text-primary mb-4">Create New Report</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 mb-4">
             {(Object.entries(typeConfig) as [ReportType, typeof typeConfig[ReportType]][]).map(([key, cfg]) => (
               <button
@@ -357,7 +357,7 @@ export default function ReportsPage() {
           <div className="flex justify-end gap-3">
             <button
               onClick={() => setShowCreateModal(false)}
-              className="px-4 py-2 text-sm text-muted hover:text-white transition-colors"
+              className="px-4 py-2 text-sm text-muted hover:text-text-primary transition-colors"
             >
               Cancel
             </button>
@@ -375,7 +375,7 @@ export default function ReportsPage() {
             <select
               value={filterType}
               onChange={e => setFilterType(e.target.value as ReportType | "all")}
-              className="bg-card-bg border border-card-border rounded-lg px-3 py-2 text-sm text-white"
+              className="bg-card-bg border border-card-border rounded-lg px-3 py-2 text-sm text-text-primary"
             >
               <option value="all">All Types</option>
               {(Object.entries(typeConfig) as [ReportType, typeof typeConfig[ReportType]][]).map(([key, cfg]) => (
@@ -385,7 +385,7 @@ export default function ReportsPage() {
             <select
               value={filterStatus}
               onChange={e => setFilterStatus(e.target.value as ReportStatus | "all")}
-              className="bg-card-bg border border-card-border rounded-lg px-3 py-2 text-sm text-white"
+              className="bg-card-bg border border-card-border rounded-lg px-3 py-2 text-sm text-text-primary"
             >
               <option value="all">All Statuses</option>
               <option value="scheduled">Scheduled</option>
@@ -403,7 +403,7 @@ export default function ReportsPage() {
               return (
                 <div key={report.id} className="bg-card-bg border border-card-border rounded-xl overflow-hidden">
                   <div
-                    className="p-5 cursor-pointer hover:bg-white/[0.02] transition-colors"
+                    className="p-5 cursor-pointer hover:bg-hover-bg transition-colors"
                     onClick={() => setExpandedReport(isExpanded ? null : report.id)}
                   >
                     <div className="flex items-start justify-between">
@@ -411,7 +411,7 @@ export default function ReportsPage() {
                         <span className="text-2xl mt-0.5">{cfg.icon}</span>
                         <div>
                           <div className="flex items-center gap-3">
-                            <h3 className="text-white font-semibold">{report.name}</h3>
+                            <h3 className="text-text-primary font-semibold">{report.name}</h3>
                             <span className={`text-xs px-2 py-0.5 rounded-full ${
                               report.status === "scheduled" ? "bg-success/10 text-success" :
                               report.status === "paused" ? "bg-warning/10 text-warning" :
@@ -532,12 +532,12 @@ export default function ReportsPage() {
             return (
               <div key={gen.id} className="bg-card-bg border border-card-border rounded-xl overflow-hidden">
                 <div
-                  className="p-5 cursor-pointer hover:bg-white/[0.02] transition-colors"
+                  className="p-5 cursor-pointer hover:bg-hover-bg transition-colors"
                   onClick={() => setExpandedGenerated(isExpanded ? null : gen.id)}
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <h3 className="text-white font-semibold">{gen.report_name}</h3>
+                      <h3 className="text-text-primary font-semibold">{gen.report_name}</h3>
                       <div className="flex items-center gap-3 mt-1 text-xs text-muted">
                         <span>Period: {gen.period}</span>
                         <span>•</span>
@@ -565,7 +565,7 @@ export default function ReportsPage() {
                       {gen.kpis.map(kpi => (
                         <div key={kpi.label} className="bg-background rounded-lg p-3">
                           <p className="text-xs text-muted">{kpi.label}</p>
-                          <p className="text-lg font-bold text-white font-mono mt-0.5">{kpi.value}</p>
+                          <p className="text-lg font-bold text-text-primary font-mono mt-0.5">{kpi.value}</p>
                           {kpi.change !== 0 && (
                             <p className={`text-xs mt-0.5 ${
                               kpi.label === "CPA" || kpi.label === "CAC"

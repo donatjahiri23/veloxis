@@ -19,7 +19,7 @@ function EventRow({ event, isNew }: { event: LiveEvent; isNew: boolean }) {
   const config = typeConfig[event.type] || typeConfig.pageview;
 
   return (
-    <div className={`flex items-center gap-4 px-4 py-2.5 border-b border-card-border/50 hover:bg-white/[0.02] transition-all ${isNew ? "animate-slide-up" : ""}`}>
+    <div className={`flex items-center gap-4 px-4 py-2.5 border-b border-card-border/50 hover:bg-hover-bg transition-all ${isNew ? "animate-slide-up" : ""}`}>
       <div className={`w-7 h-7 rounded-lg ${config.bg} flex items-center justify-center flex-shrink-0`}>
         <span className={`text-[10px] font-bold ${config.color}`}>
           {event.type.slice(0, 2).toUpperCase()}
@@ -27,7 +27,7 @@ function EventRow({ event, isNew }: { event: LiveEvent; isNew: boolean }) {
       </div>
       <div className="flex-1 min-w-0 grid grid-cols-7 gap-3 items-center text-xs">
         <span className={`font-medium ${config.color}`}>{event.type}</span>
-        <span className="text-white font-mono truncate">{event.page_url}</span>
+        <span className="text-text-primary font-mono truncate">{event.page_url}</span>
         <span className="text-muted-light">{event.channel}</span>
         <span className="text-muted-light">{event.device}</span>
         <span className="text-muted font-mono text-[10px]">{event.resolved_id || event.anonymous_id}</span>

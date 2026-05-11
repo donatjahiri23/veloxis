@@ -11,7 +11,7 @@ const COLORS = ["#6366f1", "#818cf8", "#a78bfa", "#c084fc", "#e879f9", "#f472b6"
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string; color: string }>; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[#1a1b3a] border border-card-border rounded-lg px-3 py-2 shadow-xl">
+    <div className="bg-tooltip-bg border border-card-border rounded-lg px-3 py-2 shadow-xl">
       <p className="text-xs text-muted mb-1">{label}</p>
       {payload.map((entry, i) => (
         <p key={i} className="text-sm font-semibold" style={{ color: entry.color }}>
@@ -123,7 +123,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="col-span-2 bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Events & Conversions (30 days)</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-4">Events & Conversions (30 days)</h3>
           <ResponsiveContainer width="100%" height={300}>
             <AreaChart data={timeSeries}>
               <defs>
@@ -147,7 +147,7 @@ export default function Dashboard() {
         </div>
 
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Conversions by Channel</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-4">Conversions by Channel</h3>
           <ResponsiveContainer width="100%" height={220}>
             <PieChart>
               <Pie data={pieData} cx="50%" cy="50%" innerRadius={55} outerRadius={85} paddingAngle={3} dataKey="value">
@@ -165,7 +165,7 @@ export default function Dashboard() {
                   <div className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: COLORS[i] }} />
                   <span className="text-muted-light">{item.name}</span>
                 </div>
-                <span className="text-white font-mono">{item.value}</span>
+                <span className="text-text-primary font-mono">{item.value}</span>
               </div>
             ))}
           </div>
@@ -174,7 +174,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Hourly Event Distribution</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-4">Hourly Event Distribution</h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={hourlyData}>
               <CartesianGrid strokeDasharray="3 3" stroke="#1e2044" />
@@ -187,7 +187,7 @@ export default function Dashboard() {
         </div>
 
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-4">Revenue by Hour</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-4">Revenue by Hour</h3>
           <ResponsiveContainer width="100%" height={250}>
             <BarChart data={hourlyData} margin={{ top: 20, right: 5, left: 5, bottom: 5 }}>
               <CartesianGrid strokeDasharray="3 3" stroke="#1e2044" />
@@ -203,7 +203,7 @@ export default function Dashboard() {
       </div>
 
       <div className="bg-card-bg border border-card-border rounded-xl p-5">
-        <h3 className="text-sm font-semibold text-white mb-4">Channel Performance</h3>
+        <h3 className="text-sm font-semibold text-text-primary mb-4">Channel Performance</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -218,8 +218,8 @@ export default function Dashboard() {
             </thead>
             <tbody>
               {channelData.map((row) => (
-                <tr key={row.channel} className="border-b border-card-border/50 hover:bg-white/[0.02] transition-colors">
-                  <td className="py-3 px-4 font-medium text-white">{row.channel}</td>
+                <tr key={row.channel} className="border-b border-card-border/50 hover:bg-hover-bg transition-colors">
+                  <td className="py-3 px-4 font-medium text-text-primary">{row.channel}</td>
                   <td className="py-3 px-4 text-right font-mono text-muted-light">{row.sessions.toLocaleString()}</td>
                   <td className="py-3 px-4 text-right font-mono text-muted-light">{row.conversions.toLocaleString()}</td>
                   <td className="py-3 px-4 text-right font-mono text-success">${row.revenue.toLocaleString()}</td>

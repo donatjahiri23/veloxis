@@ -37,7 +37,7 @@ function JourneyTimeline({ journey }: { journey: UserJourney }) {
             </svg>
           </div>
           <div>
-            <p className="text-sm font-mono text-white">{journey.resolved_id}</p>
+            <p className="text-sm font-mono text-text-primary">{journey.resolved_id}</p>
             <p className="text-xs text-muted">{journey.touchpoints.length} touchpoints across {journey.devices.length} device{journey.devices.length > 1 ? "s" : ""}</p>
           </div>
         </div>
@@ -70,7 +70,7 @@ function JourneyTimeline({ journey }: { journey: UserJourney }) {
               <div className="flex items-center justify-between">
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-medium text-white">{tp.channel}</span>
+                    <span className="text-xs font-medium text-text-primary">{tp.channel}</span>
                     <span className="text-[10px] px-1.5 py-0.5 rounded bg-white/5 text-muted font-mono">{tp.type}</span>
                     <span className="text-[10px] text-muted" style={{ color: deviceColors[tp.device] }}>{tp.device}</span>
                   </div>
@@ -143,7 +143,7 @@ export default function IdentityPage() {
               key={f}
               onClick={() => setFilter(f)}
               className={`px-4 py-2 text-xs font-medium transition-colors ${
-                filter === f ? "bg-accent text-white" : "text-muted-light hover:text-white"
+                filter === f ? "bg-accent text-white" : "text-muted-light hover:text-text-primary"
               }`}
             >
               {f === "all" ? "All Journeys" : f === "converted" ? "Converted" : "Cross-Device"}
@@ -159,7 +159,7 @@ export default function IdentityPage() {
             placeholder="Search by ID or channel..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full bg-card-bg border border-card-border rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-muted focus:outline-none focus:border-accent/50"
+            className="w-full bg-card-bg border border-card-border rounded-lg pl-10 pr-4 py-2 text-sm text-text-primary placeholder-muted focus:outline-none focus:border-accent/50"
           />
         </div>
         <span className="text-xs text-muted">{filtered.length} journeys</span>

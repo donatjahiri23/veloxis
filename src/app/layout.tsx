@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { AiChat } from "@/components/AiChat";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,13 +27,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: `
+          (function() {
+            try {
+              var t = localStorage.getItem('veloxis-theme');
+              if (t) document.documentElement.setAttribute('data-theme', t);
+            } catch(e) {}
+          })();
+        `}} />
+      </head>
       <body className="min-h-screen flex">
-        <Sidebar />
-        <main className="flex-1 lg:ml-64 min-h-screen">
-          {children}
-        </main>
-        <AiChat />
+        <ThemeProvider>
+          <Sidebar />
+          <main className="flex-1 lg:ml-64 min-h-screen">
+            {children}
+          </main>
+          <AiChat />
+        </ThemeProvider>
       </body>
     </html>
   );

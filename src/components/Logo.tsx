@@ -31,7 +31,7 @@ export function LogoFull({ size = 36 }: { size?: number }) {
     <div className="flex items-center gap-3">
       <Logo size={size} />
       <div>
-        <h1 className="text-lg font-bold text-white tracking-tight">Veloxis</h1>
+        <h1 className="text-lg font-bold text-text-primary tracking-tight">Veloxis</h1>
         <p className="text-[10px] text-muted tracking-widest uppercase">Marketing Intelligence</p>
       </div>
     </div>

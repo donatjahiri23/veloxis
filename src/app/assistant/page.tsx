@@ -28,7 +28,7 @@ function formatMarkdown(text: string): string {
     .replace(/>/g, "&gt;");
 
   html = html
-    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-white">$1</strong>')
+    .replace(/\*\*(.*?)\*\*/g, '<strong class="text-text-primary">$1</strong>')
     .replace(/\n\n/g, '</p><p class="mt-3">')
     .replace(/\n- /g, '</p><p class="mt-1 pl-4">• ')
     .replace(/\n(\d+)\. /g, '</p><p class="mt-1 pl-4">$1. ')
@@ -135,7 +135,7 @@ export default function AssistantPage() {
                 <div className="flex items-center gap-2 mb-1.5">
                   {msg.role === "assistant" && (
                     <div className="w-6 h-6 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">
-                      <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                      <svg className="w-3.5 h-3.5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                         <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
                       </svg>
                     </div>
@@ -166,7 +166,7 @@ export default function AssistantPage() {
             <div className="flex justify-start">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 rounded-lg bg-accent flex items-center justify-center">
-                  <svg className="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
+                  <svg className="w-3.5 h-3.5 text-text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M9.813 15.904L9 18.75l-.813-2.846a4.5 4.5 0 00-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 003.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 003.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 00-3.09 3.09z" />
                   </svg>
                 </div>
@@ -200,7 +200,7 @@ export default function AssistantPage() {
                 <button
                   key={q}
                   onClick={() => handleSend(q)}
-                  className="text-left text-xs text-muted-light bg-card-bg border border-card-border rounded-lg px-3 py-2.5 hover:border-accent/30 hover:text-white transition-all"
+                  className="text-left text-xs text-muted-light bg-card-bg border border-card-border rounded-lg px-3 py-2.5 hover:border-accent/30 hover:text-text-primary transition-all"
                 >
                   {q}
                 </button>
@@ -220,13 +220,13 @@ export default function AssistantPage() {
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleSend()}
               placeholder="Ask anything about your campaigns..."
-              className="flex-1 bg-card-bg border border-card-border rounded-xl px-4 py-3 text-sm text-white placeholder-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20"
+              className="flex-1 bg-card-bg border border-card-border rounded-xl px-4 py-3 text-sm text-text-primary placeholder-muted focus:outline-none focus:border-accent/50 focus:ring-1 focus:ring-accent/20"
               disabled={isLoading}
             />
             <button
               onClick={() => handleSend()}
               disabled={!input.trim() || isLoading}
-              className="bg-accent hover:bg-accent/80 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-xl px-5 py-3 text-sm font-medium transition-all"
+              className="bg-accent hover:bg-accent/80 disabled:opacity-40 disabled:cursor-not-allowed text-text-primary rounded-xl px-5 py-3 text-sm font-medium transition-all"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M6 12L3.269 3.126A59.768 59.768 0 0121.485 12 59.77 59.77 0 013.27 20.876L5.999 12zm0 0h7.5" />

@@ -28,7 +28,7 @@ const MODEL_COLORS: Record<Model, string> = {
 function CustomTooltip({ active, payload, label }: { active?: boolean; payload?: Array<{ value: number; name: string; color: string }>; label?: string }) {
   if (!active || !payload?.length) return null;
   return (
-    <div className="bg-[#1a1b3a] border border-card-border rounded-lg px-3 py-2 shadow-xl">
+    <div className="bg-tooltip-bg border border-card-border rounded-lg px-3 py-2 shadow-xl">
       <p className="text-xs text-muted mb-1">{label}</p>
       {payload.map((entry, i) => (
         <p key={i} className="text-sm font-semibold" style={{ color: entry.color }}>
@@ -98,7 +98,7 @@ export default function AttributionPage() {
           >
             <div className="flex items-center gap-2 mb-1">
               <div className="w-3 h-3 rounded-full" style={{ backgroundColor: MODEL_COLORS[model.key] }} />
-              <span className={`text-sm font-semibold ${selectedModel === model.key ? "text-accent-light" : "text-white"}`}>
+              <span className={`text-sm font-semibold ${selectedModel === model.key ? "text-accent-light" : "text-text-primary"}`}>
                 {model.label}
               </span>
               {model.key === "data_driven" && (
@@ -112,7 +112,7 @@ export default function AttributionPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="col-span-2 bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-1">
+          <h3 className="text-sm font-semibold text-text-primary mb-1">
             Channel Attribution — {models.find(m => m.key === selectedModel)?.label}
             {compareModel && ` vs ${models.find(m => m.key === compareModel)?.label}`}
           </h3>
@@ -132,7 +132,7 @@ export default function AttributionPage() {
         </div>
 
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
-          <h3 className="text-sm font-semibold text-white mb-1">Model Comparison Radar</h3>
+          <h3 className="text-sm font-semibold text-text-primary mb-1">Model Comparison Radar</h3>
           <p className="text-xs text-muted mb-4">All models across top channels</p>
           <ResponsiveContainer width="100%" height={400}>
             <RadarChart data={radarData}>
@@ -149,7 +149,7 @@ export default function AttributionPage() {
       </div>
 
       <div className="bg-card-bg border border-card-border rounded-xl p-5">
-        <h3 className="text-sm font-semibold text-white mb-4">Detailed Attribution Table</h3>
+        <h3 className="text-sm font-semibold text-text-primary mb-4">Detailed Attribution Table</h3>
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
@@ -166,8 +166,8 @@ export default function AttributionPage() {
             </thead>
             <tbody>
               {sortedData.map((row) => (
-                <tr key={row.channel} className="border-b border-card-border/50 hover:bg-white/[0.02] transition-colors">
-                  <td className="py-3 px-4 font-medium text-white">{row.channel}</td>
+                <tr key={row.channel} className="border-b border-card-border/50 hover:bg-hover-bg transition-colors">
+                  <td className="py-3 px-4 font-medium text-text-primary">{row.channel}</td>
                   <td className="py-3 px-4 text-right font-mono text-muted-light">{row.conversions}</td>
                   <td className="py-3 px-4 text-right font-mono text-success">${row.revenue.toLocaleString()}</td>
                   {models.map(m => (
