@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { MetricCard } from "@/components/MetricCard";
 import { DateRangePicker } from "@/components/DateRangePicker";
@@ -14,7 +14,7 @@ const statusColors: Record<string, { bg: string; text: string; dot: string }> = 
 
 type SortKey = keyof PerformanceRow;
 
-const levelTabs: { key: ViewLevel; label: string; icon: JSX.Element }[] = [
+const levelTabs: { key: ViewLevel; label: string; icon: React.ReactNode }[] = [
   {
     key: "campaign",
     label: "Campaign",

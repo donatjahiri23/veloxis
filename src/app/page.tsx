@@ -195,7 +195,7 @@ export default function Dashboard() {
               <YAxis tick={{ fontSize: 11, fill: "#64748b" }} tickFormatter={(v) => `$${v}`} />
               <Tooltip content={<CustomTooltip />} />
               <Bar dataKey="revenue" fill="#10b981" radius={[3, 3, 0, 0]} name="Revenue">
-                <LabelList dataKey="revenue" position="top" formatter={(v: number) => v >= 1000 ? `$${(v / 1000).toFixed(1)}K` : `$${v}`} style={{ fontSize: 9, fill: "#94a3b8" }} />
+                <LabelList dataKey="revenue" position="top" formatter={(v) => { const n = Number(v); return n >= 1000 ? `$${(n / 1000).toFixed(1)}K` : `$${n}`; }} style={{ fontSize: 9, fill: "#94a3b8" }} />
               </Bar>
             </BarChart>
           </ResponsiveContainer>
