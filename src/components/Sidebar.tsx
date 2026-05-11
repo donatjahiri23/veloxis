@@ -89,10 +89,10 @@ export function Sidebar() {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const { theme, toggle } = useTheme();
-  const { profile, signOut } = useAuth();
+  const { user, signOut } = useAuth();
 
-  const displayName = profile?.full_name || profile?.email?.split("@")[0] || "User";
-  const displayEmail = profile?.email || "";
+  const displayName = user?.full_name || user?.username || "User";
+  const displayUsername = user?.username || "";
   const initials = displayName.slice(0, 2).toUpperCase();
 
   useEffect(() => {
@@ -187,7 +187,7 @@ export function Sidebar() {
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm font-medium text-text-primary truncate">{displayName}</p>
-                <p className="text-[10px] text-muted truncate">{displayEmail}</p>
+                <p className="text-[10px] text-muted truncate">@{displayUsername}</p>
               </div>
               <button
                 onClick={signOut}

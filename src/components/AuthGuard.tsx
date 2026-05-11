@@ -34,7 +34,7 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
     );
   }
 
-  // Public pages — render without sidebar
+  // Public pages without auth — render without sidebar
   if (isPublicPage && !user) {
     return <>{children}</>;
   }

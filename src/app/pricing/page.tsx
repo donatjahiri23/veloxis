@@ -39,7 +39,7 @@ export default function PricingPage() {
           priceId: `price_${planId}_${billingCycle}`, // Replace with real Stripe Price IDs
           planId,
           userId: user.id,
-          email: user.email,
+          email: user.username,
           billingCycle,
         }),
       });
