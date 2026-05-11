@@ -1,24 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
-import { createClient } from "@supabase/supabase-js";
-
-function getSupabaseAdmin() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
+import { supabase } from "@/lib/supabase";
 
 export async function POST(req: NextRequest) {
   try {
-    const { priceId, planId, userId, email, billingCycle } = await req.json();
+    const { priceId, planId, userId, billingCycle } = await req.json();
 
-    if (!priceId || !userId || !email) {
+    if (!priceId || !userId) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
 
     // Check if customer already exists
-    const { data: existingSub } = await getSupabaseAdmin()
+    const { data: existingSub } = await supabase
       .from("subscriptions")
       .select("stripe_customer_id")
       .eq("user_id", userId)
@@ -28,9 +21,16 @@ export async function POST(req: NextRequest) {
 
     // Create Stripe customer if doesn't exist
     if (!customerId) {
+      // Get username from users table
+      const { data: userData } = await supabase
+        .from("users")
+        .select("username, full_name")
+        .eq("id", userId)
+        .single();
+
       const customer = await stripe.customers.create({
-        email,
-        metadata: { userId, planId },
+        name: userData?.full_name || userData?.username || undefined,
+        metadata: { userId, planId, username: userData?.username || "" },
       });
       customerId = customer.id;
     }

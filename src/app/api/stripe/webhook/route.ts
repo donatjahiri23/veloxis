@@ -1,14 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
-import { createClient } from "@supabase/supabase-js";
+import { supabase } from "@/lib/supabase";
 import Stripe from "stripe";
-
-function getSupabaseAdmin() {
-  return createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!
-  );
-}
 
 // Helper to safely get period end from subscription items
 function getSubscriptionPeriodEnd(subscription: Stripe.Subscription): number | null {
@@ -58,7 +51,7 @@ export async function POST(req: NextRequest) {
             ? session.customer
             : session.customer?.id || null;
 
-          await getSupabaseAdmin().from("subscriptions").upsert(
+          await supabase.from("subscriptions").upsert(
             {
               user_id: userId,
               stripe_customer_id: custId,
@@ -85,7 +78,7 @@ export async function POST(req: NextRequest) {
         const periodEnd = getSubscriptionPeriodEnd(subscription);
 
         if (userId) {
-          await getSupabaseAdmin()
+          await supabase
             .from("subscriptions")
             .update({
               status: subscription.status === "trialing" ? "trialing" : subscription.status,
@@ -108,7 +101,7 @@ export async function POST(req: NextRequest) {
         const userId = subscription.metadata?.userId;
 
         if (userId) {
-          await getSupabaseAdmin()
+          await supabase
             .from("subscriptions")
             .update({
               status: "canceled",
@@ -128,7 +121,7 @@ export async function POST(req: NextRequest) {
           const userId = subscription.metadata?.userId;
 
           if (userId) {
-            await getSupabaseAdmin()
+            await supabase
               .from("subscriptions")
               .update({ status: "past_due" })
               .eq("user_id", userId);

@@ -19,6 +19,22 @@ export const stripe = new Proxy({} as Stripe, {
   },
 });
 
+// Stripe Price IDs (created via /api/stripe/setup)
+export const PRICE_IDS = {
+  starter: {
+    monthly: "price_1TW2ii8nD02SCXnSdWieouSD",
+    yearly: "price_1TW2ij8nD02SCXnSuNItqFcm",
+  },
+  growth: {
+    monthly: "price_1TW2ij8nD02SCXnSmQOaoqMG",
+    yearly: "price_1TW2ik8nD02SCXnSUykxGr6j",
+  },
+  enterprise: {
+    monthly: "price_1TW2ik8nD02SCXnSZRIZIzuX",
+    yearly: "price_1TW2il8nD02SCXnSLZrqTivR",
+  },
+} as const;
+
 // Define your pricing plans
 export const PLANS = {
   starter: {

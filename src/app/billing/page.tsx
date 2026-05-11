@@ -1,17 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PageHeader } from "@/components/PageHeader";
 import { useAuth } from "@/components/AuthProvider";
 import { useSubscription } from "@/components/SubscriptionProvider";
 import { PLANS } from "@/lib/stripe";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 export default function BillingPage() {
   const { user } = useAuth();
-  const { subscription, plan, isActive, isTrial, trialDaysLeft } = useSubscription();
+  const { subscription, plan, isActive, isTrial, trialDaysLeft, refresh } = useSubscription();
   const [portalLoading, setPortalLoading] = useState(false);
+  const [syncMessage, setSyncMessage] = useState("");
   const router = useRouter();
+  const searchParams = useSearchParams();
+
+  // Sync subscription from Stripe after successful checkout
+  useEffect(() => {
+    if (searchParams.get("success") === "true" && user) {
+      setSyncMessage("Syncing your subscription...");
+      fetch("/api/stripe/sync", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ userId: user.id }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          if (data.status === "synced") {
+            setSyncMessage("Subscription activated!");
+            refresh();
+            // Clean URL
+            setTimeout(() => {
+              setSyncMessage("");
+              router.replace("/billing");
+            }, 2000);
+          } else {
+            setSyncMessage("Processing your payment... Please refresh in a moment.");
+          }
+        })
+        .catch(() => setSyncMessage(""));
+    }
+  }, [searchParams, user, refresh, router]);
 
   const currentPlan = PLANS[plan];
 
@@ -55,6 +84,14 @@ export default function BillingPage() {
         title="Billing & Subscription"
         subtitle="Manage your plan, billing information, and invoices"
       />
+
+      {/* Sync message after checkout */}
+      {syncMessage && (
+        <div className="mb-6 p-4 rounded-xl bg-success/10 border border-success/20 flex items-center gap-3">
+          <div className="w-5 h-5 border-2 border-success border-t-transparent rounded-full animate-spin flex-shrink-0" />
+          <span className="text-sm font-medium text-success">{syncMessage}</span>
+        </div>
+      )}
 
       {/* Trial banner */}
       {isTrial && trialDaysLeft > 0 && (

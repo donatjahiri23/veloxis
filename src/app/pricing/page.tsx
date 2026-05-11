@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { PLANS, PlanId } from "@/lib/stripe";
+import { PLANS, PRICE_IDS, PlanId } from "@/lib/stripe";
 import { useAuth } from "@/components/AuthProvider";
 import { useSubscription } from "@/components/SubscriptionProvider";
 import { useRouter } from "next/navigation";
@@ -30,16 +30,15 @@ export default function PricingPage() {
     setLoadingPlan(planId);
 
     try {
-      // In production, you'd use real Stripe Price IDs here
-      // For now, redirect to billing page with plan selection
+      const priceId = PRICE_IDS[planId][billingCycle === "monthly" ? "monthly" : "yearly"];
+
       const res = await fetch("/api/stripe/checkout", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          priceId: `price_${planId}_${billingCycle}`, // Replace with real Stripe Price IDs
+          priceId,
           planId,
           userId: user.id,
-          email: user.username,
           billingCycle,
         }),
       });
