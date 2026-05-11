@@ -123,14 +123,14 @@ export default function InsightsPage() {
   const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <PageHeader
         title="Insights"
         subtitle="Deep performance analytics — what's working, what's not, and where to invest"
       />
 
       {/* Top KPIs */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
         <MetricCard label="Total Ad Spend" value={totalSpend} prefix="$" change={-3.2} />
         <MetricCard label="Total Revenue" value={totalRevenue} prefix="$" change={11.8} />
         <MetricCard label="Overall ROAS" value={overallROAS} suffix="x" change={8.4} />
@@ -138,7 +138,7 @@ export default function InsightsPage() {
       </div>
 
       {/* Row 1: Funnel + Cost Trend */}
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-1">Conversion Funnel</h3>
           <p className="text-xs text-muted mb-5">Full-funnel drop-off analysis from impression to conversion</p>
@@ -175,7 +175,7 @@ export default function InsightsPage() {
       </div>
 
       {/* Row 2: CPA/CPL Trend + Budget Pacing */}
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-1">CPA & Cost per Lead Trend</h3>
           <p className="text-xs text-muted mb-4">Are acquisition costs going up or down?</p>
@@ -235,7 +235,7 @@ export default function InsightsPage() {
       </div>
 
       {/* Row 3: Daypart Heatmap */}
-      <div className="bg-card-bg border border-card-border rounded-xl p-5 mb-8">
+      <div className="bg-card-bg border border-card-border rounded-xl p-4 lg:p-5 mb-6 lg:mb-8">
         <h3 className="text-sm font-semibold text-white mb-1">Daypart Performance Heatmap</h3>
         <p className="text-xs text-muted mb-4">Conversions by day of week and hour — find your best windows</p>
         <div className="overflow-x-auto">
@@ -264,7 +264,7 @@ export default function InsightsPage() {
       </div>
 
       {/* Row 4: Creative Performance + Audience Segments */}
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-1">Creative Performance</h3>
           <p className="text-xs text-muted mb-4">Which ads are driving results? Watch for fatigue.</p>
@@ -354,7 +354,7 @@ export default function InsightsPage() {
       </div>
 
       {/* Row 5: Geo Performance */}
-      <div className="bg-card-bg border border-card-border rounded-xl p-5 mb-8">
+      <div className="bg-card-bg border border-card-border rounded-xl p-4 lg:p-5 mb-6 lg:mb-8">
         <h3 className="text-sm font-semibold text-white mb-1">Geographic Performance</h3>
         <p className="text-xs text-muted mb-4">Revenue and efficiency by region — identify expansion opportunities</p>
         <div className="grid grid-cols-2 gap-6">

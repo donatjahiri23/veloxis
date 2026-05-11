@@ -217,7 +217,7 @@ export default function RecommendationsPage() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <PageHeader
         title="AI Recommendations"
         subtitle="Data-driven action items to optimize your campaigns"
@@ -234,7 +234,7 @@ export default function RecommendationsPage() {
       />
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <span className="text-sm text-muted">Active Recommendations</span>
           <p className="text-2xl font-bold text-white mt-1">{totalImpact}</p>

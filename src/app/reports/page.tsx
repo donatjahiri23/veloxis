@@ -286,14 +286,14 @@ export default function ReportsPage() {
   const draftCount = reports.filter(r => r.status === "draft").length;
 
   return (
-    <div className="min-h-screen bg-background p-8 ml-64">
+    <div className="min-h-screen bg-background p-4 lg:p-8">
       <PageHeader
         title="Automated Reports"
         subtitle="Schedule, manage, and review automated marketing reports"
       />
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6">
         {[
           { label: "Scheduled Reports", value: scheduledCount, color: "text-success" },
           { label: "Paused", value: pausedCount, color: "text-warning" },
@@ -335,7 +335,7 @@ export default function ReportsPage() {
       {showCreateModal && (
         <div className="bg-card-bg border border-accent/30 rounded-xl p-6 mb-6">
           <h3 className="text-lg font-semibold text-white mb-4">Create New Report</h3>
-          <div className="grid grid-cols-3 gap-4 mb-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 mb-4">
             {(Object.entries(typeConfig) as [ReportType, typeof typeConfig[ReportType]][]).map(([key, cfg]) => (
               <button
                 key={key}
@@ -467,7 +467,7 @@ export default function ReportsPage() {
 
                   {isExpanded && (
                     <div className="px-5 pb-5 border-t border-card-border pt-4">
-                      <div className="grid grid-cols-3 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:gap-6">
                         <div>
                           <p className="text-xs text-muted mb-2 uppercase tracking-wider">Metrics Included</p>
                           <div className="flex flex-wrap gap-1.5">

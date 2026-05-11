@@ -177,14 +177,14 @@ export default function ComparisonPage() {
   }));
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <PageHeader
         title="Period Comparison"
         subtitle="Compare performance across two time periods side by side"
       />
 
       {/* Preset selector */}
-      <div className="flex items-center gap-2 mb-8">
+      <div className="flex flex-wrap items-center gap-2 mb-6 lg:mb-8">
         {presets.map((p, i) => (
           <button
             key={p.label}
@@ -201,7 +201,7 @@ export default function ComparisonPage() {
       </div>
 
       {/* Summary cards */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
         {[
           { label: "Revenue", curr: currentPeriod.revenue, prev: previousPeriod.revenue, format: "currency" },
           { label: "Conversions", curr: currentPeriod.conversions, prev: previousPeriod.conversions, format: "number" },
@@ -226,7 +226,7 @@ export default function ComparisonPage() {
       </div>
 
       {/* Charts */}
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-4">Revenue by Channel</h3>
           <ResponsiveContainer width="100%" height={320}>

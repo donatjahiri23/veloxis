@@ -69,13 +69,13 @@ export default function AttributionPage() {
   }));
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <PageHeader
         title="Attribution Engine"
         subtitle="Multi-touch attribution modeling across all channels and touchpoints"
       />
 
-      <div className="grid grid-cols-3 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 lg:gap-4 mb-6 lg:mb-8">
         {models.map((model) => (
           <button
             key={model.key}
@@ -110,7 +110,7 @@ export default function AttributionPage() {
         ))}
       </div>
 
-      <div className="grid grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="col-span-2 bg-card-bg border border-card-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-1">
             Channel Attribution — {models.find(m => m.key === selectedModel)?.label}

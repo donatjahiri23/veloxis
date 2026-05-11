@@ -122,13 +122,13 @@ export default function IdentityPage() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <PageHeader
         title="Identity Resolution"
         subtitle="Anonymous touchpoints stitched into unified user journeys — no PII required"
       />
 
-      <div className="grid grid-cols-5 gap-4 mb-8">
+      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 lg:gap-4 mb-6 lg:mb-8">
         <MetricCard label="Total Identities" value={stats.total} />
         <MetricCard label="Resolved Journeys" value={stats.resolved} />
         <MetricCard label="Cross-Device Users" value={stats.crossDevice} />
@@ -136,7 +136,7 @@ export default function IdentityPage() {
         <MetricCard label="Avg. Touchpoints" value={stats.avgTouchpoints} />
       </div>
 
-      <div className="flex items-center gap-4 mb-6">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mb-6">
         <div className="flex items-center bg-card-bg border border-card-border rounded-lg overflow-hidden">
           {(["all", "converted", "multi-device"] as const).map((f) => (
             <button

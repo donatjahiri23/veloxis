@@ -201,7 +201,7 @@ export function AiChat() {
       {/* Floating button */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`fixed bottom-6 right-6 z-[100] w-14 h-14 rounded-full shadow-lg shadow-accent/25 flex items-center justify-center transition-all duration-300 ${
+        className={`fixed bottom-4 right-4 lg:bottom-6 lg:right-6 z-[100] w-12 h-12 lg:w-14 lg:h-14 rounded-full shadow-lg shadow-accent/25 flex items-center justify-center transition-all duration-300 ${
           isOpen
             ? "bg-card-bg border border-card-border rotate-0"
             : "bg-accent hover:bg-accent/90 hover:scale-105"
@@ -220,7 +220,7 @@ export function AiChat() {
 
       {/* Chat panel */}
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-[100] w-[420px] h-[560px] bg-[#0d0e1a] border border-card-border rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden">
+        <div className="fixed bottom-0 right-0 sm:bottom-20 sm:right-4 lg:bottom-24 lg:right-6 z-[100] w-full h-full sm:w-[380px] sm:h-[520px] lg:w-[420px] lg:h-[560px] bg-[#0d0e1a] border border-card-border sm:rounded-2xl shadow-2xl shadow-black/50 flex flex-col overflow-hidden">
           {/* Header */}
           <div className="px-4 py-3 border-b border-card-border flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center flex-shrink-0">

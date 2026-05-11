@@ -123,11 +123,11 @@ export default function AssistantPage() {
 
   return (
     <div className="h-screen flex flex-col">
-      <div className="p-8 pb-0">
+      <div className="p-4 lg:p-8 pb-0">
         <PageHeader title="AI Assistant" subtitle="Ask anything about your campaigns — powered by Claude" />
       </div>
 
-      <div className="flex-1 overflow-y-auto px-8 pb-4">
+      <div className="flex-1 overflow-y-auto px-4 lg:px-8 pb-4">
         <div className="max-w-4xl mx-auto space-y-6">
           {messages.map((msg) => (
             <div key={msg.id} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -192,10 +192,10 @@ export default function AssistantPage() {
       </div>
 
       {messages.length <= 1 && mounted && (
-        <div className="px-8 pb-4">
+        <div className="px-4 lg:px-8 pb-4">
           <div className="max-w-4xl mx-auto">
             <p className="text-xs text-muted mb-3">Suggested questions</p>
-            <div className="grid grid-cols-2 gap-2">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
               {suggestedQuestions.map((q) => (
                 <button
                   key={q}
@@ -210,7 +210,7 @@ export default function AssistantPage() {
         </div>
       )}
 
-      <div className="p-8 pt-4 border-t border-card-border">
+      <div className="p-4 lg:p-8 pt-4 border-t border-card-border">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center gap-3">
             <input

@@ -29,7 +29,7 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="min-h-screen flex">
         <Sidebar />
-        <main className="flex-1 ml-64 min-h-screen">
+        <main className="flex-1 lg:ml-64 min-h-screen">
           {children}
         </main>
         <AiChat />

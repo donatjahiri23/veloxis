@@ -95,7 +95,7 @@ export default function Dashboard() {
   });
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <PageHeader
         title="Dashboard"
         subtitle="Real-time overview of your marketing performance"
@@ -107,21 +107,21 @@ export default function Dashboard() {
         }
       />
 
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
         <MetricCard label="Total Events" value={liveCounter} change={12.4} />
         <MetricCard label="Unique Users" value={kpis?.uniqueUsers || 0} change={8.7} />
         <MetricCard label="Conversions" value={kpis?.conversions || 0} change={15.2} />
         <MetricCard label="Revenue" value={kpis?.revenue || 0} prefix="$" change={11.8} />
       </div>
 
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
         <MetricCard label="ID Resolution Rate" value={78.4} suffix="%" change={3.2} />
         <MetricCard label="Avg. Touchpoints" value={4.7} change={-2.1} />
         <MetricCard label="Cross-Device %" value={34.8} suffix="%" change={5.6} />
         <MetricCard label="Overall ROAS" value={kpis?.roas || 0} suffix="x" change={0.8} />
       </div>
 
-      <div className="grid grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="col-span-2 bg-card-bg border border-card-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-4">Events & Conversions (30 days)</h3>
           <ResponsiveContainer width="100%" height={300}>
@@ -172,7 +172,7 @@ export default function Dashboard() {
         </div>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-4">Hourly Event Distribution</h3>
           <ResponsiveContainer width="100%" height={250}>

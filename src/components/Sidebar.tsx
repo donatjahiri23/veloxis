@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LogoFull } from "./Logo";
@@ -79,54 +79,88 @@ const iconMap: Record<string, React.ReactNode> = {
 
 export function Sidebar() {
   const pathname = usePathname();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-sidebar-bg border-r border-card-border flex flex-col z-50">
-      <div className="p-6 border-b border-card-border">
-        <LogoFull size={36} />
-      </div>
+    <>
+      {/* Mobile hamburger button */}
+      <button
+        onClick={() => setOpen(true)}
+        className="lg:hidden fixed top-4 left-4 z-50 bg-card-bg border border-card-border rounded-lg p-2 text-white hover:bg-white/10 transition-colors"
+      >
+        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+          <path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+        </svg>
+      </button>
 
-      <nav className="flex-1 p-4 space-y-1">
-        {navItems.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.href}
-              href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
-                isActive
-                  ? "bg-accent/15 text-accent-light border border-accent/20"
-                  : "text-muted-light hover:text-white hover:bg-white/5"
-              }`}
-            >
-              {iconMap[item.icon]}
-              {item.label}
-              {item.label === "Live Events" && (
-                <span className="ml-auto w-2 h-2 rounded-full bg-success animate-pulse-glow" />
-              )}
-            </Link>
-          );
-        })}
-      </nav>
+      {/* Backdrop */}
+      {open && (
+        <div
+          className="lg:hidden fixed inset-0 bg-black/60 z-40"
+          onClick={() => setOpen(false)}
+        />
+      )}
 
-      <div className="p-4 border-t border-card-border">
-        <div className="bg-card-bg rounded-lg p-3 border border-card-border">
-          <div className="flex items-center gap-2 mb-2">
-            <div className="w-2 h-2 rounded-full bg-success" />
-            <span className="text-xs font-medium text-muted-light">System Status</span>
-          </div>
-          <div className="grid grid-cols-2 gap-2 text-xs">
-            <div>
-              <span className="text-muted">Events/s</span>
-              <p className="text-white font-mono font-semibold">1,247</p>
+      {/* Sidebar */}
+      <aside className={`fixed left-0 top-0 h-screen w-64 bg-sidebar-bg border-r border-card-border flex flex-col z-50 transition-transform duration-300 lg:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full"}`}>
+        <div className="p-6 border-b border-card-border flex items-center justify-between">
+          <LogoFull size={36} />
+          <button
+            onClick={() => setOpen(false)}
+            className="lg:hidden text-muted hover:text-white transition-colors"
+          >
+            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth={1.5}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+        </div>
+
+        <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
+          {navItems.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
+                  isActive
+                    ? "bg-accent/15 text-accent-light border border-accent/20"
+                    : "text-muted-light hover:text-white hover:bg-white/5"
+                }`}
+              >
+                {iconMap[item.icon]}
+                {item.label}
+                {item.label === "Live Events" && (
+                  <span className="ml-auto w-2 h-2 rounded-full bg-success animate-pulse-glow" />
+                )}
+              </Link>
+            );
+          })}
+        </nav>
+
+        <div className="p-4 border-t border-card-border">
+          <div className="bg-card-bg rounded-lg p-3 border border-card-border">
+            <div className="flex items-center gap-2 mb-2">
+              <div className="w-2 h-2 rounded-full bg-success" />
+              <span className="text-xs font-medium text-muted-light">System Status</span>
             </div>
-            <div>
-              <span className="text-muted">Latency</span>
-              <p className="text-white font-mono font-semibold">12ms</p>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <div>
+                <span className="text-muted">Events/s</span>
+                <p className="text-white font-mono font-semibold">1,247</p>
+              </div>
+              <div>
+                <span className="text-muted">Latency</span>
+                <p className="text-white font-mono font-semibold">12ms</p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </aside>
+      </aside>
+    </>
   );
 }

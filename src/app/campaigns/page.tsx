@@ -83,20 +83,20 @@ export default function CampaignsPage() {
   };
 
   return (
-    <div className="p-8">
+    <div className="p-4 lg:p-8">
       <PageHeader
         title="Campaigns"
         subtitle="Performance analytics across all active and historical campaigns"
       />
 
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6 lg:mb-8">
         <MetricCard label="Total Spend" value={totals.spent} prefix="$" />
         <MetricCard label="Total Revenue" value={totals.revenue} prefix="$" />
         <MetricCard label="Total Conversions" value={totals.conversions} />
         <MetricCard label="Avg ROAS" value={totals.spent > 0 ? (totals.revenue / totals.spent).toFixed(2) : "0"} suffix="x" />
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mb-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-6 mb-6 lg:mb-8">
         <div className="bg-card-bg border border-card-border rounded-xl p-5">
           <h3 className="text-sm font-semibold text-white mb-4">ROAS by Campaign</h3>
           <ResponsiveContainer width="100%" height={300}>

@@ -78,7 +78,7 @@ export default function EventsPage() {
   const types = ["all", "pageview", "click", "conversion", "impression", "video_view", "scroll", "form_submit"];
 
   return (
-    <div className="p-8 h-screen flex flex-col">
+    <div className="p-4 lg:p-8 h-screen flex flex-col">
       <PageHeader
         title="Live Events"
         subtitle="Real-time event stream from your tracking pixel"
@@ -101,7 +101,7 @@ export default function EventsPage() {
         }
       />
 
-      <div className="grid grid-cols-4 gap-4 mb-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 lg:gap-4 mb-6">
         <MetricCard label="Events Captured" value={stats.total} />
         <MetricCard label="Conversions" value={stats.conversions} />
         <MetricCard label="Revenue Captured" value={stats.revenue} prefix="$" />
